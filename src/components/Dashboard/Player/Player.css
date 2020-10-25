@@ -1,0 +1,22 @@
+.Player {
+    display : flex;
+    position: fixed;
+    bottom : 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+    height : 75px;
+    color : white;
+    padding : 20px;
+}
+.player_left {
+    flex : 0.3;
+}
+.player_center {
+    flex : 0.4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.player_right {
+    flex: 0.3;
+}

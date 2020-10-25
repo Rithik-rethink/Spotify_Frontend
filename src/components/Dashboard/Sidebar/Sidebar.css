@@ -1,0 +1,40 @@
+.sidebar{
+    flex : 0.2;
+    width : 20%;
+    height: 100vh;
+    position: relative;
+    background : rgb(0, 2, 22);
+    color : white;
+    left : 0;
+}
+.sidebar > img{
+    -o-object-fit:contain; 
+    height : 65px;
+    width : 100%;
+}
+.sidebaroption {
+    display: flex;
+    align-items: center;
+    height : 50px;
+    color : grey;
+    cursor: pointer;
+    padding-left: 10%;
+    padding-right : 10%;
+    padding-top: 5%;
+}
+.sidebaroption:hover {
+    transition: 200ms all ease;
+    color : white;
+    
+}
+.search{
+    padding : 5px;
+}
+.playlists_sidebar {
+    padding-left : 5%;
+    padding-right : 10%;
+}
+.separator {
+    border-top : 1px ridge grey;
+    width : 100%;
+}

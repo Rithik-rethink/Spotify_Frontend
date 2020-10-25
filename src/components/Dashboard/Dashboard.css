@@ -1,0 +1,21 @@
+.dashboard_body {
+    display: flex;
+}
+.spotify > img {
+    width : 50%;
+}
+.spotify {
+    height: 100vh;
+    background-color: black;
+    display: grid;
+    place-items: center;
+
+}
+.spotify > a {
+    text-decoration:  none;
+    background-color: #1DB954;
+    color: white;
+    text-transform: uppercase;
+    padding: 15px;
+    border-radius: 99px;
+}

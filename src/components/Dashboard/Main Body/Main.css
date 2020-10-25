@@ -1,0 +1,47 @@
+.Main {
+    height : 100vh;
+    flex : 0.8;
+    background: linear-gradient(rgb(2, 2, 66) , black);
+    color : white;
+    padding : 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+.row{
+    display:  flex;
+    height: 5vh;
+    padding-left : 20px;
+    align-items: center;
+    
+}
+.search{
+    flex : 0.8;
+}
+.icon{
+    color : white;
+}
+.Main > div > h4 {
+    padding : 5px;
+}
+.profile {
+    flex: 0.2;
+    padding-left : 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: pointer;
+
+}
+.rendering_playlists {
+    cursor: pointer;
+    transition: 600ms all ease;
+}
+.tracks{
+    transition: 600ms all ease;
+}
+.tracks:hover {
+    transform: scale(1.1);
+}
+.search {
+    float: right;
+}
