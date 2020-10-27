@@ -7,12 +7,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 
 const cookie = new Cookies();
 class Main extends React.Component{
@@ -65,6 +59,8 @@ class Main extends React.Component{
         })
     }
 
+
+
     render(){
         const playlists_data = this.state.response.map((tracks)=>{
             return(
@@ -74,7 +70,23 @@ class Main extends React.Component{
         })
         const search_tracks = this.state.search_response_tracks.map((songs)=>{
             return(
-                <div className = 'col-12 col-sm-3 mt-4 tracks search'>
+                <div className = 'col-12 col-sm-3 mt-4 tracks search' onClick = {this.handlePlayback=()=>{
+                    const params = {
+                        "uris" : [songs.uri]
+                    }
+                    const device_id = "e13c3d1079366711e539af09518d42bf6ac88d98";
+                    const url = `https://api.spotify.com/v1/me/player/play?q=${device_id}`;
+                    Axios.put(url , params , {
+                        headers:{
+                            'Authorization' : 'Bearer ' + cookie.get('Spotify_token'),
+                        }
+                    }).then((res)=>{
+                        this.props.onNameChange(songs.album.images[0].url , songs.album.name , songs.artists[0].name);
+                        console.log(res);
+                    }).catch((err)=>{
+                        console.log(err.message);
+                    })
+                }}>
                     <img src = {songs.album.images[0].url}  alt =""  width = '100%'/>
                     <b>{songs.album.name}</b><br></br>
                     {songs.artists[0].name}

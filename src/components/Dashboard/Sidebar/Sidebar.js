@@ -12,7 +12,7 @@ class Sidebar extends React.Component{
         return(
             <div className = 'sidebar'>
                 <img src = {spotify} alt =""/>
-                <RenderComponents item = "Home" Icon = {HomeIcon}/>
+                <a href ='/in' className = 'home'><RenderComponents item = "Home" Icon = {HomeIcon}/></a>
                 <RenderComponents item = "Explore" Icon = {PublicIcon}/>
                 <RenderComponents item = "Library" Icon = {LibraryMusicIcon}/>
                 <RenderComponents item = "Create Playlists" Icon = {AddCircleOutlineIcon}/>

@@ -35,6 +35,9 @@ class Dashboard extends React.Component{
             token : "",
             token_present : false,
             user : "",
+            currently_playing : "",
+            currently_playing_name : "",
+            currently_playing_artist : "" 
         }
     }
     componentDidMount(){
@@ -58,6 +61,14 @@ class Dashboard extends React.Component{
             cookie.set('Spotify_token' , _token , { path : '/'});
         }
     }
+    onChange(newName , TrackName , Trackartist){
+        this.setState({
+            currently_playing : newName,
+            currently_playing_name : TrackName,
+            currently_playing_artist : Trackartist
+        })
+        console.log(this.state.currently_playing);
+    }
     render(){
         if(this.state.redirect_error){
             return(
@@ -75,9 +86,9 @@ class Dashboard extends React.Component{
                     <div className = 'dashboard'>
                         <div className = 'dashboard_body'>
                             <Sidebar/>
-                            <Main User = {this.state.user}/>
+                            <Main User = {this.state.user} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} onNameChange = {this.onChange.bind(this)}/>
                         </div>
-                        <Player/>
+                        <Player currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist}/>
                     </div>
                 }
             </div>

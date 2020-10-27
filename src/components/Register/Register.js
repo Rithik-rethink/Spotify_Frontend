@@ -100,7 +100,6 @@ class Register extends React.Component{
                         <p className = 'mt-2 col-12 col-sm-12'><b>This appears on your profile*</b></p>
                         
                         <FormControlLabel 
-                            label = 'end'
                             control = {<Checkbox color = 'secondary' />}
                             label = "By clicking here, you agree to Spotify's Terms and Conditions of Use"
                             labelPlacement = 'end'

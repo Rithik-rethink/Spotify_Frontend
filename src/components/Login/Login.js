@@ -60,7 +60,6 @@ class Login extends React.Component{
             "headers":{
                         "Accept": 'application/json',
                         "content-type":"application/json",
-                        
                     },
                     withCredentials : true
         }).then((res) => {
@@ -105,7 +104,6 @@ class Login extends React.Component{
                         <TextField id="outlined-basic" className = 'mt-5 col-12 col-sm-12' label="Password" type = "password" variant="filled" onChange = {(event)=>this.handleChange(event,"password")}/>
                         <p className = 'mt-3 col-12 col-sm-12'><a href = '/'>Forgot your password?</a></p>
                         <FormControlLabel 
-                            label = 'end'
                             control = {<Checkbox color = 'secondary' />}
                             label = "Remember me"
                             labelPlacement = 'end'

@@ -1,19 +1,22 @@
 import React from 'react';
 import './Player.css';
 import ShuffleIcon from '@material-ui/icons/Shuffle';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import RepeatIcon from '@material-ui/icons/Repeat';
+import track from '../../media/track.png';
 
 class Player extends React.Component{
     render(){
         return(
             <div className = 'Player'>
                 <div className = 'player_left'>
-                    Song details
-                    <FavoriteIcon/>
+                    {this.props.currently_playing !== "" ? 
+                        <img src = {this.props.currently_playing} alt ="" width = '15%'/>
+                        :<img src = {track} alt ="" width = '15%'/>}
+                    <b className = 'trackname'>{this.props.currently_playing_name}</b><br></br>
+                    <p>{this.props.currently_playing_aritist}</p>
                 </div>
                 <div className = 'player_center'>
                     <ShuffleIcon/>

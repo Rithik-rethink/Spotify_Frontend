@@ -1,6 +1,10 @@
 .Main {
-    height : 100vh;
+    height : 100s;
     flex : 0.8;
+    margin-bottom: 5%;
+    position: absolute;
+    right : 0;
+    left : 20%;
     background: linear-gradient(rgb(2, 2, 66) , black);
     color : white;
     padding : 10px;

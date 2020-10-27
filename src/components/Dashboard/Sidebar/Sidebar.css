@@ -2,13 +2,12 @@
     flex : 0.2;
     width : 20%;
     height: 100vh;
-    position: relative;
+    position: fixed;
     background : rgb(0, 2, 22);
     color : white;
     left : 0;
 }
 .sidebar > img{
-    -o-object-fit:contain; 
     height : 65px;
     width : 100%;
 }
@@ -26,6 +25,9 @@
     transition: 200ms all ease;
     color : white;
     
+}
+.home{
+    text-decoration: none;
 }
 .search{
     padding : 5px;
