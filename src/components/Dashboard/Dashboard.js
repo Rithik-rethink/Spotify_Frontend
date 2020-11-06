@@ -8,6 +8,10 @@ import Sidebar from './Sidebar/Sidebar.js';
 import client from '../client_info.js';
 import spotify from '../media/spotify.svg';
 import Cookies from 'universal-cookie';
+import Browse from './Main Body/Browse.js';
+import Library from './Main Body/Library';
+import Track from './Main Body/Track.js';
+
 const authEndpoint = client.authEndpoint;
 const clientId = client.CLIENT_ID;
 const redirectUri = client.redirectURI;
@@ -37,7 +41,13 @@ class Dashboard extends React.Component{
             user : "",
             currently_playing : "",
             currently_playing_name : "",
-            currently_playing_artist : "" 
+            currently_playing_artist : "" ,
+            currently_playing_songUri : "",
+            response : [],
+            isPaused : true,
+            isPlaying:false,
+            currentPage : 'Home',
+            currently_playing_artist_id : "",
         }
     }
     componentDidMount(){
@@ -51,6 +61,18 @@ class Dashboard extends React.Component{
                 redirect_error : true
             })            
         })
+        Axios.get('http://localhost:8080/api/user/currentPlayingFetch', {withCredentials: true}).then((res)=>{
+            // console.log(res);
+            this.setState({
+                currently_playing : res.data.url,
+                currently_playing_name : res.data.name,
+                currently_playing_artist : res.data.artist,
+                currently_playing_songUri : res.data.songUri,
+                currently_playing_artist_id : res.data.songId
+            })
+        }).catch((err)=>{
+            console.log(err.message);
+        })
         let _token = hash.access_token;
         if (_token) {
         // Set token
@@ -60,14 +82,70 @@ class Dashboard extends React.Component{
             });
             cookie.set('Spotify_token' , _token , { path : '/'});
         }
+        Axios.get('https://api.spotify.com/v1/browse/new-releases' , {
+            headers : {'Authorization' : 'Bearer ' + cookie.get('Spotify_token')}
+        }).then((res)=>{
+            this.setState({
+                response : res.data.albums.items
+            })
+        }).catch((err)=>{
+            console.log(err.message);
+        })
     }
-    onChange(newName , TrackName , Trackartist){
+    onChange(newName , TrackName , Trackartist ,SongLink , Paused , currentPage , id){
+        Trackartist = "(" + Trackartist + ")";
         this.setState({
             currently_playing : newName,
             currently_playing_name : TrackName,
-            currently_playing_artist : Trackartist
+            currently_playing_artist : Trackartist,
+            currently_playing_songUri : SongLink,
+            isPaused : Paused,
+            currentPage : currentPage,
+            currently_playing_artist_id : id
         })
-        console.log(this.state.currently_playing);
+        let form_data = {
+            'image':this.state.currently_playing,
+            'title': this.state.currently_playing_name,
+            'artist':this.state.currently_playing_artist,
+            'songUri':this.state.currently_playing_songUri,
+            'artistId':this.state.currently_playing_artist_id
+        };
+        const url = 'http://localhost:8080/api/user/currentPlaying';
+
+        Axios.post(url,form_data,{
+            headers: {
+                'content-type': 'application/json'
+            },
+            withCredentials: true
+        }).then((res)=>{
+            console.log(res);
+        }).catch((err)=>{
+            console.log(err.message);
+        })
+        Axios.get('https://api.spotify.com/v1/me/player/currently-playing',{
+            headers:{
+                'Authorization' : 'Bearer ' + cookie.get('Spotify_token'),
+            }
+        }).then((res)=>{
+            console.log(res);
+            this.setState({
+                isPlaying : res.is_playing
+            })
+        }).catch((err)=>{
+            console.log(err.message);
+        })
+    }
+    responseChange(page){
+        this.setState({
+            currentPage : page
+        })
+        console.log(this.state.currentPage);
+    }
+    onClickSong(){
+        this.setState({
+            currentPage : 'Track',
+        })
+
     }
     render(){
         if(this.state.redirect_error){
@@ -75,7 +153,20 @@ class Dashboard extends React.Component{
                 <Redirect to = "/login"/>
             );
         }
+        var body = <Main Response = {this.state.response} User = {this.state.user} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} currently_playing_songUri = {this.state.currently_playing_songUri} isPaused = {this.state.isPaused} currentPage = {this.state.currentPage} currently_playing_artist_id = {this.state.currently_playing_artist_id} onNameChange = {this.onChange.bind(this)}/>
         
+        if(this.state.currentPage === 'Home'){
+            body = <Main Response = {this.state.response} User = {this.state.user} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} currently_playing_songUri = {this.state.currently_playing_songUri} isPaused = {this.state.isPaused} currently_playing_artist_id = {this.state.currently_playing_artist_id} onNameChange = {this.onChange.bind(this)}/>
+        }
+        else if(this.state.currentPage === 'Browse'){
+            body = <Browse/>
+        }
+        else if(this.state.currentPage === 'Library'){
+            body = <Library/>
+        }
+        else if(this.state.currentPage === 'Track'){
+            body = <Track Response = {this.state.response} User = {this.state.user} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} currently_playing_songUri = {this.state.currently_playing_songUri} isPaused = {this.state.isPaused} currentPage = {this.state.currentPage} currently_playing_artist_id = {this.state.currently_playing_artist_id} onNameChange = {this.onChange.bind(this)}/>
+        }
         return(
             <div>
 
@@ -85,10 +176,11 @@ class Dashboard extends React.Component{
                 </div>:
                     <div className = 'dashboard'>
                         <div className = 'dashboard_body'>
-                            <Sidebar/>
-                            <Main User = {this.state.user} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} onNameChange = {this.onChange.bind(this)}/>
+                            <Sidebar Response = {this.state.response} currentPage = {this.state.currentPage} onNameChange = {this.responseChange.bind(this)}/>
+                            {/* {this.state.currentPage === 'Home' ? <Main Response = {this.state.response} User = {this.state.user} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} currently_playing_songUri = {this.state.currently_playing_songUri} isPaused = {this.state.isPaused} onNameChange = {this.onChange.bind(this)}/>:<Browse/>} */}
+                            {body}
                         </div>
-                        <Player currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist}/>
+                        <Player currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} currently_playing_songUri = {this.state.currently_playing_songUri} is_Playing = {this.state.isPlaying} onNameChange = {this.onClickSong.bind(this)}/>
                     </div>
                 }
             </div>

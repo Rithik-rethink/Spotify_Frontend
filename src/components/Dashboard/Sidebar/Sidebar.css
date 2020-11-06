@@ -1,11 +1,25 @@
 .sidebar{
-    flex : 0.2;
+    flex : 0.1;
     width : 20%;
     height: 100vh;
     position: fixed;
     background : rgb(0, 2, 22);
     color : white;
     left : 0;
+}
+.categories {
+    padding-left : 10%;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+}
+.scrollable{
+    overflow-y: auto;
+    height : 100%;
+}
+.category_name {
+    padding : 5px;
+    cursor: pointer;
 }
 .sidebar > img{
     height : 65px;

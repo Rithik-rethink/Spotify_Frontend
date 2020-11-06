@@ -6,32 +6,45 @@
     background-color: rgb(0, 0, 0);
     height : 75px;
     color : white;
-    padding : 10px;
 }
 .player_left {
+    padding : 10px;
     flex : 0.3;
+    cursor: pointer;
 }
 .player_center {
+    transition : 200ms all ease;
     flex : 0.4;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-top : 5px;
+    justify-content: space-evenly;
 }
+.controls {
+    margin-top :1%;
+}
+
 .player_right {
     flex: 0.3;
+    display: flex;
+    align-items: center;
 }
 .trackname {
     padding-top : 0;
     padding-left: 5px;
-    display: inline-block;
-    /* show the marquee just outside the paragraph */
-    will-change: transform;
-    animation: marquee 15s linear infinite;
 }
-.trackname b:hover {
-    animation-play-state: paused
+
+.play{
+    cursor: pointer;
 }
-@keyframes trackname {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(-100%, 0); }
+.shuffle {
+    cursor: pointer;
+}
+.SkipNext {
+    cursor: pointer;
+}
+.SkipPrev {
+    cursor: pointer;
+}
+.repeat {
+    cursor: pointer;
 }

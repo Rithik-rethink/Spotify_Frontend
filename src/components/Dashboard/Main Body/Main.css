@@ -1,6 +1,8 @@
 .Main {
     height : 100s;
     flex : 0.8;
+    width : 79.6%;
+
     margin-bottom: 5%;
     position: absolute;
     right : 0;
@@ -11,15 +13,22 @@
     justify-content: space-between;
     align-items: center;
 }
+.track {
+    height : 100%;
+}
 .row{
     display:  flex;
     height: 5vh;
     padding-left : 20px;
     align-items: center;
-    
 }
 .search{
     flex : 0.8;
+}
+.search_field{
+    background-color: blue;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 .icon{
     color : white;
@@ -48,4 +57,24 @@
 }
 .search {
     float: right;
+}
+.new_release{
+    padding : 5px;
+    margin-top : 3%;
+    border-bottom : 1px ridge;
+    width : 100%;
+}
+.song_name {
+    float:right;
+}
+
+.favIcon {
+    cursor: pointer;
+    font-size: 3em;
+}
+
+.trackName {
+    padding : 10px;
+    border-bottom : 1px ridge grey;
+    width : 100%;
 }

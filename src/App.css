@@ -2,3 +2,6 @@
   top:0;
   transition: all ease 1600ms;
 }
+html{
+  scroll-behavior: smooth;
+}
