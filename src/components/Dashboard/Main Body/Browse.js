@@ -18,7 +18,8 @@ class Library extends React.Component{
         this.state = {
             user : "",
             redirect_error : false,
-            categories : []
+            categories : [],
+            currentPage : 'Browse'
         }
         
     }
@@ -74,9 +75,10 @@ class Library extends React.Component{
                 <Redirect to = "/login"/>
             );
         }
+        
         const categories = this.state.categories.map((tracks)=>{
             return(
-                <div className = 'col-12 col-sm-3 mt-2 tracks search'>
+                <div className = 'col-12 col-sm-3 mt-2 tracks search' >
                     <img src = {tracks.icons[0].url} alt ="" width = '100%'/> 
                     <b>{tracks.name}</b><br></br>
                 </div>
@@ -99,7 +101,7 @@ class Library extends React.Component{
                     }}
                     />
                     <div className = 'profile'>
-                        <Avatar alt ="" src = {user} className = 'avatar'/><h5>{this.state.user}</h5>
+                        <Avatar alt ="" src = {user} className = 'avatar'/><h5 className = 'name'>{this.state.user}</h5>
                     </div>
                 </div>
                 <div className = 'rendering_playlists mt-4'>

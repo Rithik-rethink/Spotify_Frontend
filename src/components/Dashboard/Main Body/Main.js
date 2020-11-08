@@ -128,7 +128,7 @@ class Main extends React.Component{
                     }}
                     />
                     <div className = 'profile'>
-                        <Avatar alt ="" src = {user} className = 'avatar'/><h5>{this.props.User}</h5>
+                        <Avatar alt ="" src = {user} className = 'avatar'/><h5 className = 'name'>{this.props.User}</h5>
                     </div>
                 </div>
                 <div className = 'rendering_playlists'>

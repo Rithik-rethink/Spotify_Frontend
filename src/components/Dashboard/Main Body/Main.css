@@ -1,7 +1,7 @@
 .Main {
-    height : 100s;
     flex : 0.8;
     width : 79.6%;
+    height : 100s;
 
     margin-bottom: 5%;
     position: absolute;
@@ -41,9 +41,17 @@
     padding-left : 100px;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
     cursor: pointer;
 
+}
+.name {
+    margin-left : 5px;
+}
+.tagar {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color : white; 
 }
 .rendering_playlists {
     cursor: pointer;
@@ -77,4 +85,7 @@
     padding : 10px;
     border-bottom : 1px ridge grey;
     width : 100%;
+}
+.icon {
+    cursor: pointer;
 }

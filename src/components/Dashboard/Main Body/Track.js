@@ -10,7 +10,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Avatar from '@material-ui/core/Avatar';
 import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
+// import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 import QueueMusicRoundedIcon from '@material-ui/icons/QueueMusicRounded';
 
 const cookie = new Cookies();
@@ -30,7 +30,8 @@ class Track extends React.Component {
             search_response_artists : [],
             single_response : [],
             album_response : [],
-            currentArtist : {}
+            currentArtist : {},
+            tag : ""
         }
         
     }
@@ -55,6 +56,15 @@ class Track extends React.Component {
         }).catch((err)=>{
             console.log(err.message);
         })
+    }
+    tagChange(event){
+        var val = event.currentTarget.value;
+        var q = "";
+        q = q + val;
+        this.setState({
+            tag : q
+        })
+        
     }
     handleChange(event){
         var value = event.currentTarget.value;
@@ -95,6 +105,10 @@ class Track extends React.Component {
     pause(){
         this.audio.pause();
     }
+    tagClick(){
+        console.log('Tagged!');
+        console.log(this.state.tag);
+    }
     render(){
         if(this.state.redirect_error){
             return(
@@ -126,19 +140,20 @@ class Track extends React.Component {
                 </div>
             );
         })
-        const artist = () =>{
-            return(
-                <div className = 'row'>
-                                <div className = 'col-12 col-sm-3 mt-4'>
-                                    <img alt ="" src = {this.state.currentArtist.images[0].url} width = '100%'/>
-                                </div>
-                                <div className = 'col-12 col-sm-9'>
-                                    <h3>{this.state.currentArtist.name}</h3>
-                                    <p>Followers:{this.state.currentArtist.followers.total}</p>
-                                </div>
-                            </div>
-            );
-        }
+        // const artist = () =>{
+        //     return(
+        //         <div className = 'row'>
+        //                         <div className = 'col-12 col-sm-3 mt-4'>
+        //                             <img alt ="" src = {this.state.currentArtist.images[0].url} width = '100%'/>
+        //                         </div>
+        //                         <div className = 'col-12 col-sm-9'>
+        //                             <h3>{this.state.currentArtist.name}</h3>
+        //                             <p>Followers:{this.state.currentArtist.followers.total}</p>
+        //                         </div>
+        //                     </div>
+        //     );
+        // }
+        
         return(
             <div className = 'Main track'>
                 <div className = 'row'>
@@ -156,7 +171,7 @@ class Track extends React.Component {
                     }}
                     />
                     <div className = 'profile'>
-                        <Avatar alt ="" src = {user} className = 'avatar'/><h5>{this.state.user}</h5>
+                        <Avatar alt ="" src = {user} className = 'avatar'/><h5 className = 'name'>{this.state.user}</h5>
                     </div>
                 </div>
                 <div className = 'rendering_playlists'>
@@ -167,10 +182,11 @@ class Track extends React.Component {
                                 <div className = 'col-12 col-sm-9 '>
                                     <h1><b>{this.props.currently_playing_name}</b></h1>
                                     <h3>{this.props.currently_playing_artist}</h3>
-                                    {!this.state.Liked?<FavoriteBorderOutlinedIcon className = 'favIcon' onClick={this.click.bind(this)} />:<FavoriteIcon className = 'favIcon' onClick={this.click.bind(this)}/>}{" "}<span><LocalOfferRoundedIcon className ='facIcon'/></span>{" "}<QueueMusicRoundedIcon className = 'facIcon'/>
+                                    {!this.state.Liked?<FavoriteBorderOutlinedIcon className = 'favIcon' onClick={this.click.bind(this)} />:<FavoriteIcon className = 'favIcon' onClick={this.click.bind(this)}/>}{" "}<QueueMusicRoundedIcon className = 'facIcon'/><br></br>
                                 </div>
+                            <Avatar alt ="" src = {user} className = 'avatar mt-5'/>
+                            <input type = 'text' placeholder = 'Add a comment..' className = 'tagar mt-5 ml-3'/>
                             </div>
-                            {artist}
                         </div>
                         :
                         <div className = 'mt-4'>

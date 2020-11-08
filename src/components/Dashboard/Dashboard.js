@@ -147,6 +147,16 @@ class Dashboard extends React.Component{
         })
 
     }
+    NewClick(currentPage,img,name,artist,uri,artistId){
+        this.setState({
+            currentPage : currentPage,
+            currently_playing : img,
+            currently_playing_name : name ,
+            currently_playing_artist : artist ,
+            currently_playing_songUri : uri ,
+            currently_playing_artist_id : artistId
+        })
+    }
     render(){
         if(this.state.redirect_error){
             return(
@@ -162,7 +172,7 @@ class Dashboard extends React.Component{
             body = <Browse/>
         }
         else if(this.state.currentPage === 'Library'){
-            body = <Library/>
+            body = <Library currentPage = {this.state.currentPage} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} currently_playing_songUri = {this.state.currently_playing_songUri} isPaused = {this.state.isPaused} currently_playing_artist_id = {this.state.currently_playing_artist_id}  onNameChange = {this.NewClick.bind(this)}/>
         }
         else if(this.state.currentPage === 'Track'){
             body = <Track Response = {this.state.response} User = {this.state.user} currently_playing = {this.state.currently_playing} currently_playing_name = {this.state.currently_playing_name} currently_playing_artist = {this.state.currently_playing_artist} currently_playing_songUri = {this.state.currently_playing_songUri} isPaused = {this.state.isPaused} currentPage = {this.state.currentPage} currently_playing_artist_id = {this.state.currently_playing_artist_id} onNameChange = {this.onChange.bind(this)}/>
