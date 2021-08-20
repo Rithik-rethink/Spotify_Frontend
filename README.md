@@ -1,68 +1,30 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+SeeVid
+Thinking of adding a magical sunset scene to end a reel? Maybe particular part of a conference that you missed? Whatever it maybe, SeeVid provides you the timestamp of the exact content you're looking for with just a prompt word. It serves by helping pinpoint these instances to you, make the task of extracting your favorite clip from a video hassle-free and thus conveniently aiding users in the creation of diverse content!
 
-### `npm start`
+Problem Statement
+Online videos would make up for over 80% of all consumer traffic. Considering how most people have been cooped up in their homes this year, it is safe to assume that this basis is accurate. More than 75% of people waste time watching other parts of the video, which they weren’t looking for.
+And there are tons of people who make these videos, for myriad reasons. It might be a student preparing a presentation, an influencer making a reel or a professional producing commissioned content. Let's not forget those who make these clips out of pure passion! There are new, up and coming apps everyday to help edit videos and pictures. There aren't, however, a lot of places to turn to when you want to escape foraging the boundless Internet for a few seconds of an hour long video.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+What it does
+With this tool, the user will be able to maneuver to a particular clip by providing a link and description.
+Our user-friendly website first authenticates the user then takes in a request.
+When the user enters a URL and a query, our AI model processes the request and returns the appropriate timestamp that satisfies the given query along with the duration of the clip.
+Built with
+TensoFlow
+Trained the deep learning model on TensorFlow using the coco2014 dataset to get the labels of the objects in each frame.
+PyTorch
+the OCR module uses the Pytorch to make better detection/recognition as fast as possible.
+Flask
+used Flask to set up the server for the deep learning model
+React
+front-end is built on React.js
+MongoDB
+to store the user credentials, queries, processed video and other data
+Express
+used express.js to create an api in order to connect the frontend and the database
+Future Scope
+Can be used as an tool for generating the insights of a video
+Execution time and accuracy can be improved
+more optimized similarity functions can be used for understanding the keywords better
